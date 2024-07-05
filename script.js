@@ -25,12 +25,17 @@ inputSlider.addEventListener("input", function() {
 generatePassword.addEventListener("click", function(e) {
     e.preventDefault();
 
-    let allChars = ""
+    let allChars = "";
 
     if (upperCase.checked) allChars += upperCaseLetters;
     if (lowerCase.checked) allChars += lowerCaseLetters;
     if (numbers.checked) allChars += allNumbers;
     if (symbols.checked) allChars += specialLetters;
+
+    if (allChars.length === 0) {
+        alert("Please select at least one character type.");
+        return;
+    }
 
     // now allChars will cantain all the interested characters. 
     // e.g: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" ( user wants to add the uppercase letters and numbers only )
