@@ -1,1 +1,1 @@
-Review Site: [https://ironlockpwd.netlify.app]
+Review Site: https://ironlockpwd.netlify.app
