@@ -1,78 +1,78 @@
-
-const inputSlider = document.querySelector(".input-slider")
-const passSizeContainer = document.querySelector(".length-container");
-const outputContainer = document.querySelector("#password");
-const generatePassword = document.querySelector("#generateBtn")
-const copyBtn = document.querySelector("#copyBtn");
-
-const upperCase = document.querySelector("#uppercase");
-const lowerCase = document.querySelector("#lowercase");
-const numbers = document.querySelector("#numbers");
-const symbols = document.querySelector("#symbols");
-
-const upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
-const allNumbers = "1234567890"
-const specialLetters = "!@#$%^&*()_+~`|}{[]:;?><,/-="
-
-
-passSizeContainer.innerText = inputSlider.value;
-
-inputSlider.addEventListener("input", function() {
-    passSizeContainer.innerText = inputSlider.value;
-})
-
-generatePassword.addEventListener("click", function(e) {
-    e.preventDefault();
-
-    let allChars = "";
-
-    if (upperCase.checked) allChars += upperCaseLetters;
-    if (lowerCase.checked) allChars += lowerCaseLetters;
-    if (numbers.checked) allChars += allNumbers;
-    if (symbols.checked) allChars += specialLetters;
-
-    if (allChars.length === 0) {
+(function() {
+  const elements = {
+    numbers: "1234567890",
+    specialLetters: "!@#$%^&*()_+~`|}{[]:;?><,/-=",
+    lowerCaseLetters: "abcdefghijklmnopqrstuvwxyz",
+    upperCaseLetters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    symbolsCheckbox: document.querySelector("#symbols"),
+    numbersCheckbox: document.querySelector("#numbers"),
+    lowerCaseCheckbox: document.querySelector("#lowercase"),
+    upperCaseCheckbox: document.querySelector("#uppercase"),
+    passwordLength: document.querySelector("#password-length"),
+    passwordLenghtText: document.querySelector(".length-text"),
+    passwordFieldOutput: document.querySelector(".password-field__output"),
+    passwordGenerateButton: document.querySelector(".password-generate-button"),
+    passwordFieldCopyButton: document.querySelector(".password-field__copy-button"),
+  }
+  
+  elements.passwordLenghtText.innerText = elements.passwordLength.value;
+  
+  elements.passwordLength.addEventListener("input", function() {
+    elements.passwordLenghtText.innerText = elements.passwordLength.value;
+  })
+  
+  elements.passwordGenerateButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      elements.passwordFieldOutput.value = generatePassword();
+  })
+  
+  elements.passwordFieldCopyButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      copyPassword(elements.passwordFieldOutput);
+  })
+  
+  window.addEventListener("blur", () => {
+      this.document.title = "Come back to secure yourself :(";
+  })
+  
+  window.addEventListener("focus", () => {
+      this.document.title = "Password Generator";
+  })
+  
+  function generatePassword() {
+  
+    let sampleSpace = "";
+    sampleSpace += elements.upperCaseCheckbox.checked ? elements.upperCaseLetters : "";
+    sampleSpace += elements.lowerCaseCheckbox.checked ? elements.lowerCaseLetters : "";
+    sampleSpace += elements.numbersCheckbox.checked ? elements.numbers : "";
+    sampleSpace += elements.symbolsCheckbox.checked ? elements.specialLetters : "";
+  
+    if (sampleSpace.length === 0) {
         alert("Please select at least one character type.");
         return;
     }
-
-    // now allChars will cantain all the interested characters. 
-    // e.g: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" ( user wants to add the uppercase letters and numbers only )
-
-    // now to generate password from the characters which user want to add in their password;
+  
     let password = "";
-    for (let i = 0; i < inputSlider.value; i++) {
-        password += allChars.charAt(Math.floor(Math.random() * allChars.length));
-    } 
-
-    // show password 
-    outputContainer.value = password;
-})
-
-copyBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-
-    if (outputContainer.value === "") {
+    for (let i = 0; i < elements.passwordLength.value; i++) {
+      const randomIndex = Math.floor(Math.random() * sampleSpace.length);
+      password += sampleSpace.charAt(randomIndex);
+    }
+    return password;
+  }
+  
+  function copyPassword(passwordField) {
+    
+    if (passwordField.value === "") {
         alert("There's nothing to copy :(");
         return;
     }
-
-    navigator.clipboard.writeText(outputContainer.value);
-    outputContainer.value = "Password Copied";
-
+  
+    const password = passwordField.value;
+    navigator.clipboard.writeText(password);
+    passwordField.value = "Password Copied";
+    
     setTimeout(() => {
-        outputContainer.value = "";
+      passwordField.value = password;
     }, 500);
-
-})
-
-
-
-window.addEventListener("blur", () => {
-    this.document.title = "Come back to secure yourself :("
-})
-
-window.addEventListener("focus", () => {
-    this.document.title = "Password Generator";
-})
+  }
+})()
