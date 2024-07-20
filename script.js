@@ -8,17 +8,17 @@
     numbersCheckbox: document.querySelector("#numbers"),
     lowerCaseCheckbox: document.querySelector("#lowercase"),
     upperCaseCheckbox: document.querySelector("#uppercase"),
-    passwordLength: document.querySelector("#password-length"),
+    passwordLengthSlider: document.querySelector("#password-length"),
     passwordLenghtText: document.querySelector(".length-text"),
     passwordFieldOutput: document.querySelector(".password-field__output"),
     passwordGenerateButton: document.querySelector(".password-generate-button"),
     passwordFieldCopyButton: document.querySelector(".password-field__copy-button"),
   }
   
-  elements.passwordLenghtText.innerText = elements.passwordLength.value;
+  elements.passwordLenghtText.innerText = elements.passwordLengthSlider.value;
   
-  elements.passwordLength.addEventListener("input", function() {
-    elements.passwordLenghtText.innerText = elements.passwordLength.value;
+  elements.passwordLengthSlider.addEventListener("input", function() {
+    elements.passwordLenghtText.innerText = elements.passwordLengthSlider.value;
   })
   
   elements.passwordGenerateButton.addEventListener("click", function(e) {
@@ -53,7 +53,7 @@
     }
   
     let password = "";
-    for (let i = 0; i < elements.passwordLength.value; i++) {
+    for (let i = 0; i < elements.passwordLengthSlider.value; i++) {
       const randomIndex = Math.floor(Math.random() * sampleSpace.length);
       password += sampleSpace.charAt(randomIndex);
     }
@@ -75,4 +75,4 @@
       passwordField.value = password;
     }, 500);
   }
-})()
+})();
