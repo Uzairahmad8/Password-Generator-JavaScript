@@ -13,7 +13,7 @@ body {
     height: 100vh;
 }
 
-.container {
+.password-generator {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -21,25 +21,25 @@ body {
     text-align: center;
 }
 
-h1 {
+.password-generator__title {
     margin-bottom: 20px;
 }
 
-.password-box {
+.password-generator__field {
     display: flex;
     margin-bottom: 20px;
 }
 
-#password {
+.password-field__output {
     flex: 1;
     padding: 10px;
-    font-size: 16px;
+    font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
     outline: none;
 }
 
-#copyBtn {
+.password-field__copy-button {
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -49,37 +49,42 @@ h1 {
     font-size: 16px;
 }
 
-#copyBtn:hover {
+.password-field__button:hover {
     background-color: #45a049;
 }
 
-.settings {
+
+.password-generator__settings {
     margin-bottom: 20px;
 }
 
-.settings label {
+.password-generator__settings label {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
 }
 
-.settings .range-container {
+.password-settings__length {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#generateBtn {
+.password-generator__settings input[type='checkbox'] {
+    cursor: pointer;
+}
+
+.password-generate-button {
     padding: 10px 20px;
     background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
-#generateBtn:hover {
+.password-generate-button:hover {
     background-color: #0056b3;
 }
